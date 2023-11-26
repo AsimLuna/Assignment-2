@@ -26,3 +26,30 @@ async function fetchData() {
     console.error("Error fetching data:", error);
   }
 }
+function renderProducts() {
+  list.innerHTML = "";
+  const startIndex = (currentPage - 1) * pageSize;
+  const endIndex = startIndex + pageSize;
+  const displayedProducts = data.products.slice(startIndex, endIndex);
+
+  displayedProducts.forEach((product) => {
+    const productElement = document.createElement("div");
+    productElement.classList.add("product");
+    productElement.innerHTML = `
+    <div class="image">
+      <img src=${product.thumbnail}>
+    </div>
+    <div class= "product-info">
+      <h3 class="prod-title">${product.title}</h3>
+      <p class="price">Price:$${product.price}</p>
+      <p class="discount">Discount: ${product.discountPercentage}%</p>
+      <p class="category">Category: ${product.category}</p>
+      <p class="stock">Stock: ${product.stock}</p>
+    </div>
+    <div class="details">
+      <button class="glow-on-hover" onclick="openProductInfoPage(${product.id})">Click for More Details</button>
+    </div>
+    `;
+    list.appendChild(productElement);
+  });
+}
