@@ -56,6 +56,21 @@ function renderProducts() {
     list.appendChild(productElement);
   });
 }
+function applyFilters() {
+  const selectedCategory = categories.value.toLowerCase();
+  const searchTerm = searchInput.value.toLowerCase();
+
+  list.innerHTML = "";
+
+  data.products.forEach((product) => {
+    const categoryMatches =
+      selectedCategory === "all" ||
+      product.category.toLowerCase() === selectedCategory;
+    const searchMatches =
+      product.title.toLowerCase().includes(searchTerm) ||
+      product.category.toLowerCase().includes(searchTerm) ||
+      product.description.toLowerCase().includes(searchTerm);
+  }}
 
 fetchData();
 function openProductInfoPage(productId) {
