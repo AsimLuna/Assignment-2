@@ -11,6 +11,7 @@ async function fetchData() {
     data = await response.json();
     const addedCategories = new Set();
     data.products.forEach((product) => {
+      // only unique categories
       const category = product.category;
       if (!addedCategories.has(category)) {
         const categoryName = document.createElement("option");
@@ -20,13 +21,15 @@ async function fetchData() {
         addedCategories.add(category);
       }
     });
-    renderProducts();
-    renderPagination();
+    renderProducts(); // render the page
+    renderPagination(); // render the pagination
   } catch (error) {
     console.error("Error fetching data:", error);
   }
 }
+
 function renderProducts() {
+  // render the products for the page number we are in.
   list.innerHTML = "";
   const startIndex = (currentPage - 1) * pageSize;
   const endIndex = startIndex + pageSize;
@@ -52,4 +55,9 @@ function renderProducts() {
     `;
     list.appendChild(productElement);
   });
+}
+
+fetchData();
+function openProductInfoPage(productId) {
+  window.location.href = `productinfo.html?id=${productId}`;
 }
