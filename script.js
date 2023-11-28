@@ -70,6 +70,13 @@ function applyFilters() {
       product.title.toLowerCase().includes(searchTerm) ||
       product.category.toLowerCase().includes(searchTerm) ||
       product.description.toLowerCase().includes(searchTerm);
+      if (categoryMatches && searchMatches) {
+      const productElement = document.createElement("div");
+      productElement.classList.add("product");
+      productElement.innerHTML = `
+      <div class="image">
+        <img src=${product.thumbnail}>
+      </div>
   }}
 
 fetchData();
