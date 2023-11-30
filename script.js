@@ -70,14 +70,47 @@ function applyFilters() {
       product.title.toLowerCase().includes(searchTerm) ||
       product.category.toLowerCase().includes(searchTerm) ||
       product.description.toLowerCase().includes(searchTerm);
-      if (categoryMatches && searchMatches) {
+    if (categoryMatches && searchMatches) {
       const productElement = document.createElement("div");
       productElement.classList.add("product");
       productElement.innerHTML = `
       <div class="image">
         <img src=${product.thumbnail}>
       </div>
-  }}
+<div class= "product-info">
+        <h3 class="prod-title">${product.title}</h3>
+        <p class="price">Price:$${product.price}</p>
+        <p class="discount">Discount: ${product.discountPercentage}%</p>
+        <p class="category">Category: ${product.category}</p>
+        <p class="stock">Stock: ${product.stock}</p>
+      </div>
+      <div class="details">
+        <button class="glow-on-hover" onclick="openProductInfoPage(${product.id})">Click for More Details</button>
+      </div>
+      `;
+      list.appendChild(productElement);
+    }
+  });
+}
+function renderPagination() {
+  const totalPages = Math.ceil(data.products.length / pageSize);
+
+  const paginationContainer = document.querySelector(".pagination");
+  if (paginationContainer) {
+    paginationContainer.remove();
+  }
+  const paginationDiv = document.createElement("div");
+  paginationDiv.classList.add("pagination");
+
+  const prevButton = document.createElement("button");
+  prevButton.textContent = "Previous";
+  prevButton.addEventListener("click", () => {
+    if (currentPage > 1) {
+      currentPage--;
+      renderProducts();
+      renderPagination();
+    }
+  });
 
 fetchData();
 function openProductInfoPage(productId) {
