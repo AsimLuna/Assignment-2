@@ -26,7 +26,6 @@ function displayProductDetails(product) {
     images.src = image;
     imagesContainer.appendChild(images);
   });
-  console.log(product);
   const detailContainer = document.getElementById("productDetails");
   const productDetails = `
   <div class="info">

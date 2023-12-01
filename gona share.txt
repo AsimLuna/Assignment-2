@@ -76,7 +76,7 @@ function applyFilters() {
       productElement.innerHTML = `
       <div class="image">
         <img src=${product.thumbnail}>
-      </div> 
+      </div> //checkpoint
       <div class= "product-info">
         <h3 class="prod-title">${product.title}</h3>
         <p class="price">Price:$${product.price}</p>
